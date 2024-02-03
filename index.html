@@ -61,6 +61,7 @@
             <button id="no">No</button>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -97,6 +98,16 @@
         })
     </script>
     <script>
+        const defaults = {
+            spread: 360,
+            ticks: 100,
+            gravity: 0,
+            decay: 0.94,
+            startVelocity: 30,
+            shapes: ["heart"],
+            colors: ["FFC0CB", "FF69B4", "FF1493", "C71585"],
+        };
+
         let noButton = document.getElementById('no');
         let yesButton = document.getElementById('yes');
         let h3 = document.getElementById('h3');
@@ -112,14 +123,27 @@
         , 'Hit it with a re-think, fam.', 'Consider giving it an upgrade', "How 'bout a quick refresh on that thought?"]
         let noHitter = 0;
         yesButton.addEventListener('click', () => {
-            h3.innerHTML = 'YAY!!!'
+            h3.innerHTML = 'YAY!!! ❤️'
             isItAYes = true
-            yesButton.disabled = 'disabled'
-            yesButton.style.cursor = 'context-menu'
             noButton.addEventListener('click', (e) => {
                 alert('Nope! No take-backs! :p')
                 e.preventDefault();
             })
+            confetti({
+                ...defaults,
+                particleCount: 50,
+                scalar: 2,
+            });
+            confetti({
+                ...defaults,
+                particleCount: 25,
+                scalar: 3,
+            });
+            confetti({
+                ...defaults,
+                particleCount: 10,
+                scalar: 4,
+            });
         })
         noButton.addEventListener('click', () => {
             if (noHitter === strings.length - 1) {
