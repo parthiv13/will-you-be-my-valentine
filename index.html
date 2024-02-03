@@ -18,6 +18,8 @@
         .container {
             display: flex;
             flex-flow: column;
+            justify-content: center;
+            align-items: center;
             gap: 20px;
         }
         .row {
@@ -51,6 +53,11 @@
             min-width: 50px;
             height: 50px;
         }
+        img {
+            width: 300px;
+            height: 300px;
+            background-image: cover;
+        }
     </style>
 </head>
 <body>
@@ -59,6 +66,7 @@
         <img id="img-yes" src="./assets/gifs/bear-kiss-bear-kisses.gif" alt="">
         <img id="img-yes1" src="./assets/gifs/eid.gif" alt="">
         <img id="img-no" src="./assets/gifs/love-you-forever.gif" alt="">
+        <img id="img-no1" src="./assets/gifs/cuties-my.gif" alt="">
         <h3 id="h3">Will you be my valentine?</h3>
         <div class="row">
             <button id="yes">Yes</button>
@@ -120,9 +128,11 @@
         let imgYes = document.getElementById('img-yes')
         let imgYes1 = document.getElementById('img-yes1')
         let imgNo = document.getElementById('img-no')
+        let imgNo1 = document.getElementById('img-no1')
         imgYes.style.display = 'none'
         imgYes1.style.display = 'none'
         imgNo.style.display = 'none'
+        imgNo1.style.display = 'none'
         var fontSize = parseFloat(style);
         let isItAYes = false;
         let screenWidth = window.innerWidth / 2.
@@ -138,12 +148,14 @@
             h3.innerHTML = 'YAY!!! 💘'
             yesHitter++
             if (yesHitter % 2 === 0) {
-                imgYes.style.display = 'block'
-                imgYes1.style.display = 'none'
-            } else {
                 imgYes1.style.display = 'block'
                 imgYes.style.display = 'none'
+            } else {
+                imgYes.style.display = 'block'
+                imgYes1.style.display = 'none'
             }
+            imgNo.style.display = 'none'
+            imgNo1.style.display = 'none'
             img.style.display = 'none'
             isItAYes = true
             noButton.addEventListener('click', (e) => {
@@ -174,6 +186,8 @@
                     noButton.style.backgroundColor = 'red'
                 })
                 noButton.innerHTML = 'Ugh! Ok!'
+                imgNo.style.display = 'none'
+                imgNo1.style.display = 'block'
             } else if (!isItAYes) {
                 let width = yesButton.getBoundingClientRect().width;
                 let height = yesButton.getBoundingClientRect().height;
@@ -184,7 +198,12 @@
                 yesButton.style.minHeight = (height * 1.1) + 'px';
                 noButton.innerHTML = strings[noHitter];
                 noHitter++;
+                imgNo.style.display = 'block'
+                imgNo1.style.display = 'none'
             }
+            imgYes.style.display = 'none'
+            imgYes1.style.display = 'none'
+            img.style.display = 'none'
         })
     </script>
 </body>
