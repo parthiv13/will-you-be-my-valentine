@@ -13,7 +13,7 @@
             justify-content: center;
             align-items: center;
             font-family: Arial, Helvetica, sans-serif;
-            overflow: hidden;
+            overflow: scroll;
         }
         .container {
             display: flex;
@@ -61,6 +61,41 @@
             <button id="no">No</button>
         </div>
     </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyBdFHblQIrURGYdMa5Jed9CFXRU6SBW3IU",
+          authDomain: "be-my-valentine-b9ccd.firebaseapp.com",
+          projectId: "be-my-valentine-b9ccd",
+          storageBucket: "be-my-valentine-b9ccd.appspot.com",
+          messagingSenderId: "961127303856",
+          appId: "1:961127303856:web:78aecd2eba1cc7b5338975",
+          measurementId: "G-Q2B7MDV7RW"
+        };
+      
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        const db = getDatabase();
+
+        var yesButton = document.getElementById('yes');
+        yesButton.addEventListener('click', () => {
+            set(ref(db, 'results/' + new Date()), {
+                name: 'somu',
+                time: new Date()
+            }).catch(err => console.log(err))
+        })
+    </script>
     <script>
         let noButton = document.getElementById('no');
         let yesButton = document.getElementById('yes');
@@ -68,6 +103,7 @@
         let style = window.getComputedStyle(yesButton, null).getPropertyValue('font-size');
         var fontSize = parseFloat(style);
         let isItAYes = false;
+        let screenWidth = window.innerWidth / 2.
         let strings = ['Are you sure?', 'Really Sure?', 'Think again!', 'Last chance!', 'Surely not?', 'You might regret this!'
         , 'Give it another thought!', 'Are you absolutely certain?', 'This could be a mistake', 'Have a heart', "Don't be so cold"
         , "You're breaking my heart!", 'Are you unwavering in your stance?', 'Have you double-checked?', 'Consider it with fresh eyes.'
@@ -96,8 +132,9 @@
             } else if (!isItAYes) {
                 let width = yesButton.getBoundingClientRect().width;
                 let height = yesButton.getBoundingClientRect().height;
+                let finalWidth = width + (noHitter / strings.length) * (screenWidth - width)
                 let finalFontSize = fontSize + (noHitter / strings.length) * (100. - fontSize)
-                yesButton.style.minWidth = (width * 1.1) + 'px';
+                yesButton.style.minWidth = finalWidth + 'px';
                 yesButton.style.fontSize = finalFontSize + 'px'
                 yesButton.style.minHeight = (height * 1.1) + 'px';
                 noButton.innerHTML = strings[noHitter];
