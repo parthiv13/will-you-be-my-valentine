@@ -55,6 +55,10 @@
 </head>
 <body>
     <div class="container">
+        <img id="img" src="./assets/gifs/brown-love-heart-brown-cute-heart.gif" alt="">
+        <img id="img-yes" src="./assets/gifs/bear-kiss-bear-kisses.gif" alt="">
+        <img id="img-yes1" src="./assets/gifs/eid.gif" alt="">
+        <img id="img-no" src="./assets/gifs/love-you-forever.gif" alt="">
         <h3 id="h3">Will you be my valentine?</h3>
         <div class="row">
             <button id="yes">Yes</button>
@@ -112,6 +116,13 @@
         let yesButton = document.getElementById('yes');
         let h3 = document.getElementById('h3');
         let style = window.getComputedStyle(yesButton, null).getPropertyValue('font-size');
+        let img = document.getElementById('img')
+        let imgYes = document.getElementById('img-yes')
+        let imgYes1 = document.getElementById('img-yes1')
+        let imgNo = document.getElementById('img-no')
+        imgYes.style.display = 'none'
+        imgYes1.style.display = 'none'
+        imgNo.style.display = 'none'
         var fontSize = parseFloat(style);
         let isItAYes = false;
         let screenWidth = window.innerWidth / 2.
@@ -122,11 +133,21 @@
         , 'Maybe give it another vibe check before you lock it in?', "Reboot your decision-making system and see if it's still on point."
         , 'Hit it with a re-think, fam.', 'Consider giving it an upgrade', "How 'bout a quick refresh on that thought?"]
         let noHitter = 0;
+        let yesHitter = 0;
         yesButton.addEventListener('click', () => {
-            h3.innerHTML = 'YAY!!! ❤️'
+            h3.innerHTML = 'YAY!!! 💘'
+            yesHitter++
+            if (yesHitter % 2 === 0) {
+                imgYes.style.display = 'block'
+                imgYes1.style.display = 'none'
+            } else {
+                imgYes1.style.display = 'block'
+                imgYes.style.display = 'none'
+            }
+            img.style.display = 'none'
             isItAYes = true
             noButton.addEventListener('click', (e) => {
-                alert('Nope! No take-backs! :p')
+                noButton.innerHTML = 'Nope! No backsies!!'
                 e.preventDefault();
             })
             confetti({
