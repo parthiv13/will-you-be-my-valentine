@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Valentine!</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-flow: column;
+            gap: 20px;
+        }
+        .row {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+        }
+        button {
+            cursor: pointer;
+            outline: none;
+            border-radius: 5px;
+            display: inline-block;
+            background: transparent;
+            border: none;
+            padding: 10px;
+        }
+        #no {
+            background-color: red;
+            color: white;
+            width: auto;
+            min-width: 50px;
+            height: 50px;
+        }
+        #no:hover {
+            background-color: rgb(207, 9, 9);
+        }
+        #yes {
+            background-color: green;
+            color: white;
+            min-width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 id="h3">Will you be my valentine?</h3>
+        <div class="row">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+    </div>
+    <script>
+        let noButton = document.getElementById('no');
+        let yesButton = document.getElementById('yes');
+        let h3 = document.getElementById('h3');
+        let style = window.getComputedStyle(yesButton, null).getPropertyValue('font-size');
+        var fontSize = parseFloat(style);
+        let isItAYes = false;
+        let strings = ['Are you sure?', 'Really Sure?', 'Think again!', 'Last chance!', 'Surely not?', 'You might regret this!'
+        , 'Give it another thought!', 'Are you absolutely certain?', 'This could be a mistake', 'Have a heart', "Don't be so cold"
+        , "You're breaking my heart!", 'Are you unwavering in your stance?', 'Have you double-checked?', 'Consider it with fresh eyes.'
+        , 'Take a moment to reassess.', 'Ponder it again.', 'Mull it over once more.', 'Deliberate on it afresh.'
+        , 'Maybe give it another vibe check before you lock it in?', "Reboot your decision-making system and see if it's still on point."
+        , 'Hit it with a re-think, fam.', 'Consider giving it an upgrade', "How 'bout a quick refresh on that thought?"]
+        let noHitter = 0;
+        yesButton.addEventListener('click', () => {
+            h3.innerHTML = 'YAY!!!'
+            isItAYes = true
+            yesButton.disabled = 'disabled'
+            yesButton.style.cursor = 'context-menu'
+            noButton.addEventListener('click', (e) => {
+                alert('Nope! No take-backs! :p')
+                e.preventDefault();
+            })
+        })
+        noButton.addEventListener('click', () => {
+            if (noHitter === strings.length - 1) {
+                noButton.disabled = "disabled"
+                noButton.style.cursor = 'context-menu'
+                noButton.addEventListener('mouseover', e => {
+                    noButton.style.backgroundColor = 'red'
+                })
+                noButton.innerHTML = 'Ugh! Ok!'
+            } else if (!isItAYes) {
+                let width = yesButton.getBoundingClientRect().width;
+                let height = yesButton.getBoundingClientRect().height;
+                let finalFontSize = fontSize + (noHitter / strings.length) * (100. - fontSize)
+                yesButton.style.minWidth = (width * 1.1) + 'px';
+                yesButton.style.fontSize = finalFontSize + 'px'
+                yesButton.style.minHeight = (height * 1.1) + 'px';
+                noButton.innerHTML = strings[noHitter];
+                noHitter++;
+            }
+        })
+    </script>
+</body>
+</html>
