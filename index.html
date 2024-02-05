@@ -14,6 +14,7 @@
             align-items: center;
             font-family: Arial, Helvetica, sans-serif;
             overflow: scroll;
+            position: relative;
         }
         .container {
             display: flex;
@@ -58,6 +59,11 @@
             height: 300px;
             background-image: cover;
         }
+        footer {
+            position: absolute;
+            bottom: 5%;
+            right: 10%;
+        }
     </style>
 </head>
 <body>
@@ -72,6 +78,7 @@
             <button id="yes">Yes</button>
             <button id="no">No</button>
         </div>
+        <footer>Built with 💘 by parthiv.</footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script type="module">
@@ -191,11 +198,12 @@
             } else if (!isItAYes) {
                 let width = yesButton.getBoundingClientRect().width;
                 let height = yesButton.getBoundingClientRect().height;
-                let finalWidth = width + (noHitter / strings.length) * (screenWidth - width)
-                let finalFontSize = fontSize + (noHitter / strings.length) * (100. - fontSize)
+                let finalWidth = width + ((noHitter / strings.length) * ((screenWidth / 3.) -  width))
+                let finalHeight = finalWidth
+                let finalFontSize = fontSize + (noHitter / strings.length) * (70. - fontSize)
                 yesButton.style.minWidth = finalWidth + 'px';
                 yesButton.style.fontSize = finalFontSize + 'px'
-                yesButton.style.minHeight = (height * 1.1) + 'px';
+                yesButton.style.minHeight = finalHeight + 'px';
                 noButton.innerHTML = strings[noHitter];
                 noHitter++;
                 imgNo.style.display = 'block'
