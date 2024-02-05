@@ -13,7 +13,7 @@
             justify-content: center;
             align-items: center;
             font-family: Arial, Helvetica, sans-serif;
-            overflow: scroll;
+            overflow: hidden;
             position: relative;
         }
         .container {
@@ -198,7 +198,7 @@
             } else if (!isItAYes) {
                 let width = yesButton.getBoundingClientRect().width;
                 let height = yesButton.getBoundingClientRect().height;
-                let finalWidth = width + ((noHitter / strings.length) * ((screenWidth / 3.) -  width))
+                let finalWidth = width + ((noHitter / strings.length) * ((screenWidth / 2.) -  width))
                 let finalHeight = finalWidth
                 let finalFontSize = fontSize + (noHitter / strings.length) * (70. - fontSize)
                 yesButton.style.minWidth = finalWidth + 'px';
